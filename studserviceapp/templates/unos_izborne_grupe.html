@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Unos izborne grupe</title>
+    </head>
+    <body>
+        <form action="{% url 'save_izborne_grupe' %}" method="post">
+            {% csrf_token %}
+            <label>Oznaka grupe</label><br>
+            <input name="oznaka_grupe"/><br>
+            <label>Oznaka semestra</label><br>
+            <input name="oznaka_semestra"/><br>
+            <label>Kapacitet</label><br>
+            <input name="kapacitet"/><br>
+            <label>Smer</label><br>
+            <input name="smer"/><br>
+            <label>Aktivna</label>
+            <input type="checkbox" name="aktivna"><br>
+            <label>Za semestar</label><label><a style="margin-left:10px;" href="{% url 'unos_semestra' 'administrator' %}">Unesi novi semestar</a></label><br>
+            <select name="semestar">
+                {% for s in semestri %}
+                    <option>{{ s.skolska_godina_pocetak }}/{{ s.skolska_godina_kraj }}</option>
+                {% endfor %}
+            </select><br>
+            <label>Predmeti</label><br>
+            <select name="predmeti" size="6" multiple>
+                {% for p in predmeti %}
+                    <option>{{ p.naziv }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <input type="submit" value="Snimi">
+        </form>
+    </body>
+</html>

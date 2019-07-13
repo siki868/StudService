@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Dodaj sliku</title>
+    </head>
+    <body>
+        <form action="{% url 'save_dodaj_sliku' username=nalog.username%}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label>Slika</label><br>
+            <input id="slicka" type="file" name="pic" accept="image/*">
+            <input type="submit" value="Snimi">
+        </form>
+    </body>
+</html>

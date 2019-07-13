@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Slanje maila</title>
+    </head>
+    <body>
+        <form action="{% url 'salji_mail_save' %}" method="post">
+            {% csrf_token %}
+            <label>Ime: </label>
+            <input name="Ime" value="{{ nastavnik.ime }}"/>
+            <label>Prezime: </label>
+            <input name="Prezime" value="{{ nastavnik.prezime }}"/>
+            <label>Email: </label>
+            <input name="Mail" value="{{ email }}"/><br><br>
+            <label>Predmeti</label><br>
+            <select name="Predmeti" size="6" multiple>
+                {% for p in predmeti %}
+                    <option>{{ p.naziv }}</option>
+                {% endfor %}
+            </select><br><br>
+            <label>Naslov: </label>
+            <input name="Naslov"><br><br>
+            <label>Poruka: </label><br>
+            <textarea name="msgArea" rows="4" cols="50">
+            </textarea><br>
+            <label>File: </label>
+            <input type="file" name="file">
+            <br><br>
+            <input type="submit" value="Posalji">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+{% if studenti %}
+    <table>
+        <thead>
+            <tr>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Broj indeksa</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in studenti %}
+                <tr>
+                    {% if not s.slika == None %}
+                        <td><a href="{{s.slika.url}}">{{ s.ime }}</a></td>
+                    {% else %}
+                        <td>{{ s.ime }}</td>
+                    {% endif %}
+                    <td><a href="{% url 'timetableforuser' s.nalog.username %}">{{ s.prezime }}</a></td>
+                    <td>{{ s.broj_indeksa }}/{{ s.godina_upisa }}</td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Nema studenata u grupi</p>
+{% endif %}
+<style>
+        table{
+            text-align: center;
+            font-size: 15px;
+        }
+        td, th{
+            padding: 9px;
+        }
+        table tr:nth-child(even) {
+            background-color: #eee;
+            border-bottom: 1px solid #ddd;
+        }
+        table tr:nth-child(odd) {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            border-bottom: 1px solid black;
+        }
+</style>

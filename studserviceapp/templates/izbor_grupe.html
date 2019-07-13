@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Izbor grupe</title>
+    </head>
+    <body>
+        <form action="{% url 'save_izbor_grupe' %}" method="post">
+            {% csrf_token %}
+            <label>Indeks</label><br>
+            <input name="indeks" value="{{ student.smer }} {{ student.broj_indeksa }}/{{ student.godina_upisa }}"/><br>
+            <label>Ime</label><br>
+            <input name="ime" value="{{ student.ime }}"/><br>
+            <label>Prezime</label><br>
+            <input name="prezime" value="{{ student.prezime }}"/><br>
+            <label>Broj do sada ukupno ostvarenih ESPB</label>
+            <input name="ostvarenoESPB"/><br>
+            <label>Skolske godine {{ semestar.skolska_godina_pocetak }}/{{ semestar.skolska_godina_kraj }} upisujem ESPB</label>
+            <input name="upisujeESPB"/><br>
+            <label>Broj do sad polozenih ispita</label>
+            <input name="broj_polozenih_ispita"/><br>
+            <label>Upisujem semestar</label>
+            <input name="upisuje_semestar"/><br>
+            <label>Prvi put upisujem semestar</label>
+            <input type="checkbox" name="prvi_put_upisuje_semestar"><br>
+            <label>Grupa</label><br>
+            <select name="izabrana_grupa">
+                {% for g in grupe %}
+                    {% if g.aktivna %}
+                        {% if g.smer == student.smer %}
+                            <option>{{ g.oznaka_grupe }}</option>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </select><br>
+            <label>Nepolozeni predmeti iz prethodnih godina</label><br>
+            <select name="nepolozeni_predmeti" size="6" multiple>
+                {% for p in predmeti %}
+                    <option>{{ p.naziv }}</option>
+                {% endfor %}
+            </select><br>
+            <label>Nacin placanja skolarine(Odjednom/Na rate/Stipendista)</label>
+            <input name="nacin_placanja"/><br>
+            <br><br>
+            <input type="submit" value="Snimi">
+        </form>
+    </body>
+</html>

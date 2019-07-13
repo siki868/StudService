@@ -1,0 +1,51 @@
+<meta charset="UTF-8">
+{% if termini %}
+    <table id="t01" style="width:100%">
+        <tr>
+            <th>Predmet</th>
+            <th>Tip</th>
+            <th>Nastavnik</th>
+            <th>Grupe</th>
+            <th>Dan</th>
+            <th>Termin</th>
+            <th>Ucionica</th>
+        </tr>
+    {% for t in termini %}
+        <tr>
+            <td>{{ t.predmet }}</td>
+            <td>{{ t.tip_nastave }}</td>
+            <td>{{ t.nastavnik }}</td>
+            <td>
+                {% for g in t.grupe.all %}
+                    {{g.oznaka_grupe}},
+                {% endfor %}
+            </td>
+            <td>{{ t.dan }}</td>
+            <td>{{ t.pocetak}}-{{ t.zavrsetak }}</td>
+            <td>{{ t.oznaka_ucionice }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>Nema termina</p>
+{% endif %}
+<style>
+table#t01{
+    text-align: center;
+    font-size: 15px;
+}
+td, th{
+    padding: 9px;
+}
+table#t01 tr:nth-child(even) {
+    background-color: #eee;
+    border-bottom: 1px solid #ddd;
+}
+table#t01 tr:nth-child(odd) {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+table#t01 th {
+    border-bottom: 1px solid black;
+}
+</style>

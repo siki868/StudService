@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Unos semestra</title>
+    </head>
+    <body>
+        <form action="{% url 'save_semestar' %}" method="post">
+            {% csrf_token %}
+            <label>Vrsta semestra(parni/neparni)</label><br>
+            <input name="vrsta"/><br>
+            <label>Skolska godina pocetak</label><br>
+            <input name="skolska_godina_pocetak"/><br>
+            <label>Skolska godina kraj</label>
+            <input name="skolska_godina_kraj"/><br><br>
+            <input type="submit" value="Snimi">
+        </form>
+    </body>
+</html>

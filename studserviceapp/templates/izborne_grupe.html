@@ -1,0 +1,38 @@
+{% if izborne_grupe %}
+    <table>
+        <thead>
+            <tr>
+                <th>Grupa</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for g in izborne_grupe %}
+                <tr>
+                    <td><a href="{% url 'clanovi_grupe' g.oznaka_grupe %}">{{ g.oznaka_grupe }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Nema grupa u bazi</p>
+{% endif %}
+<style>
+        table{
+            text-align: center;
+            font-size: 15px;
+        }
+        td, th{
+            padding: 9px;
+        }
+        table tr:nth-child(even) {
+            background-color: #eee;
+            border-bottom: 1px solid #ddd;
+        }
+        table tr:nth-child(odd) {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            border-bottom: 1px solid black;
+        }
+</style>

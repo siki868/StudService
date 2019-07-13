@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Unos obaveštenja</title>
+    </head>
+    <body>
+        <form action="{% url 'save_izmena_izborne_grupe' %}" method="post">
+            {% csrf_token %}
+            <label>Oznaka grupe</label><br>
+            <input name="oznaka_grupe" value='{{ grupa.oznaka_grupe }}' readonly/><br>
+            <label>Oznaka semestra</label><br>
+            <input name="oznaka_semestra" value='{{ grupa.oznaka_semestra }}'/><br>
+            <label>Kapacitet</label><br>
+            <input name="kapacitet" value='{{ grupa.kapacitet }}'/><br>
+            <label>Smer</label><br>
+            <input name="smer" value='{{ grupa.smer }}'/><br>
+            <label>Aktivna</label>
+            {% if grupa.aktivna == True %}
+                <input type="checkbox" name="aktivna" checked="checked"><br>
+            {% else %}
+                <input type="checkbox" name="aktivna"><br>
+            {% endif %}
+            <label>Za semestar</label><br>
+            <select name="semestar">
+                {% for s in semestri %}
+                    {% if s == grupa.smer %}
+                        <option selected="selected">{{ s.skolska_godina_pocetak }}/{{ s.skolska_godina_kraj }}</option>
+                    {% else %}    
+                        <option>{{ s.skolska_godina_pocetak }}/{{ s.skolska_godina_kraj }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select><br>
+            <label>Predmeti</label><br>
+            <select name="predmeti" size="6" multiple>
+                {% for p in predmeti %}
+                    {% if p in grupa.predmeti %}
+                        <option selected="selected">{{ p.naziv }}</option>
+                    {% else %}
+                        <option>{{ p.naziv }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <br><br>
+            <input type="submit" value="Snimi">
+        </form>
+    </body>
+</html>
